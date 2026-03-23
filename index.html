@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
@@ -229,6 +229,41 @@
       height:120px;
       resize:none;
     }
+    .menu-btn {
+  display: none;
+}
+
+/* Mobile view */
+@media (max-width:768px) {
+
+  .menu-btn {
+    display: block;
+    font-size: 1.8rem;
+    color: #38bdf8;
+    cursor: pointer;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -220px;
+    width: 200px;
+    height: 100vh;
+    background: rgba(2,6,23,0.95);
+    flex-direction: column;
+    padding-top: 80px;
+    transition: 0.3s;
+  }
+
+  nav a {
+    display: block;
+    margin: 20px;
+  }
+
+  nav.active {
+    right: 0;
+  }
+}
 
   </style>
 </head>
@@ -450,6 +485,9 @@ function sendMessage(e) {
     btn.innerText = '❌ Failed';
     btn.style.background = 'red';
   });
+}
+  function toggleMenu() {
+  document.querySelector("nav").classList.toggle("active");
 }
 </script>
 </body>
