@@ -1,193 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
-body{
-background:linear-gradient(135deg,#020617,#0a2540,#000);
-color:#e2e8f0;
-overflow-x:hidden;
-}
+    body {
+      background: linear-gradient(135deg, #020617, #0a2540, #000000);
+      color:#e2e8f0;
+      overflow-x:hidden;
+    }
 
-header{
-position:fixed;width:100%;top:0;
-background:rgba(2,6,23,0.8);
-backdrop-filter:blur(12px);
-display:flex;justify-content:space-between;align-items:center;
-padding:15px 20px;z-index:1000;
-}
+    header {
+      position:fixed; width:100%; top:0;
+      background:rgba(2,6,23,0.7);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(56,189,248,0.2);
+      display:flex; justify-content:space-between;
+      padding:15px 50px; z-index:1000;
+    }
 
-header h1{color:#38bdf8}
+    header h1 { color:#38bdf8; }
 
-.menu-btn{
-display:none;
-font-size:1.8rem;
-color:#38bdf8;
-cursor:pointer;
-}
+    nav a {
+      color:#fff; margin-left:20px; cursor:pointer;
+      position:relative;
+    }
 
-nav a{
-color:#fff;
-margin-left:20px;
-cursor:pointer;
-}
+    nav a::after {
+      content:'';
+      position:absolute;
+      bottom:-5px; left:0;
+      width:0%; height:2px;
+      background:#38bdf8;
+      transition:0.3s;
+    }
 
-section{
-display:none;
-padding:120px 20px;
-min-height:100vh;
-animation:fadeIn .6s ease;
-}
+    nav a:hover::after { width:100%; }
 
-.active{display:block}
+    section {
+      display:none;
+      padding:120px 50px;
+      min-height:100vh;
+      animation:fadeIn 0.6s ease;
+    }
 
-.section-box{
-max-width:1000px;
-margin:auto;
-padding:25px;
-background:rgba(2,6,23,0.7);
-border-radius:20px;
-backdrop-filter:blur(10px);
-}
+    .active { display:block; }
 
-.hero{text-align:center}
-.hero img{
-width:150px;height:150px;border-radius:50%;
-border:3px solid #38bdf8;
-box-shadow:0 0 20px #38bdf8;
-}
+    /* HERO */
+    .hero {
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-margin-top:20px;
-}
+    .hero img {
+      width:160px; height:160px;
+      border-radius:50%;
+      border:3px solid #38bdf8;
+      margin-bottom:20px;
+      transition:0.4s;
+      box-shadow:0 0 20px rgba(56,189,248,0.4);
+    }
 
-.card{
-padding:20px;
-border-radius:15px;
-background:rgba(2,6,23,0.6);
-transition:.3s;
-}
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 10px 25px rgba(56,189,248,.3);
-}
+    .hero img:hover {
+      transform:scale(1.1);
+      box-shadow:0 0 25px #38bdf8;
+    }
 
-.btn{
-padding:10px 20px;
-background:#38bdf8;
-border:none;border-radius:5px;
-cursor:pointer;
-}
+    .hero h2 {
+      text-align:center;
+      margin-bottom:25px;
+      font-size:2.2rem;
+      letter-spacing:1px;
+      color:#f1f5f9;
+      position:relative;
+    }
 
-/* MOBILE MENU */
-@media(max-width:768px){
+    .hero p {
+      color:#94a3b8;
+      margin-top:10px;
+    }
 
-.menu-btn{display:block}
+    .btn {
+      margin-top:20px;
+      padding:10px 20px;
+      background:#38bdf8;
+      border:none; border-radius:5px;
+      cursor:pointer;
+      transition:0.3s;
+    }
 
-nav{
-position:fixed;
-top:0;
-right:-220px;
-width:200px;
-height:100vh;
-background:#020617;
-display:flex;
-flex-direction:column;
-padding-top:80px;
-transition:.3s;
-}
+    .btn:hover {
+      transform:scale(1.1);
+      box-shadow:0 0 15px #38bdf8;
+    }
 
-nav a{
-margin:20px;
-}
+    /* GRID */
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+      margin-top:40px;
+    }
 
-nav.active{right:0}
+    /* CARDS */
+    .card {
+      background:rgba(2,6,23,0.6);
+      border:1px solid rgba(56,189,248,0.2);
+      border-radius:15px;
+      padding:20px;
+      backdrop-filter:blur(12px);
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+    }
 
-}
+    .card::before {
+      content:'';
+      position:absolute;
+      width:100%; height:100%;
+      background:linear-gradient(120deg,transparent,#38bdf8,transparent);
+      top:-100%; left:0;
+      transition:0.5s;
+    }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
-}
-</style>
+    .card:hover::before { top:100%; }
+
+    .card:hover {
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 20px 40px rgba(56,189,248,0.3);
+    }
+
+    .card img {
+      width:100%; border-radius:10px;
+      transition:0.4s;
+    }
+
+    .card:hover img { transform:scale(1.08); }
+
+    /* SECTION TITLES */
+    h2 {
+      text-align:center;
+      margin-bottom:20px;
+      font-size:2rem;
+      position:relative;
+    }
+
+    h2::after {
+      content:'';
+      width:60px; height:3px;
+      background:#38bdf8;
+      display:block;
+      margin:10px auto;
+    }
+
+    footer {
+      text-align:center;
+      padding:25px;
+      background:linear-gradient(90deg,#020617,#020617,#14532d);
+      border-top:1px solid rgba(56,189,248,0.2);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);} 
+      to {opacity:1; transform:translateY(0);} }
+
+    @keyframes slideUp {
+      from {opacity:0; transform:translateY(40px);} 
+      to {opacity:1; transform:translateY(0);} }
+
+  
+
+    /* CONTACT FORM STYLING */
+    .contact-form .input-box {
+      position:relative;
+      margin-bottom:20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width:100%;
+      padding:12px;
+      background:transparent;
+      border:1px solid rgba(56,189,248,0.3);
+      border-radius:6px;
+      color:#fff;
+      outline:none;
+    }
+
+    .contact-form label {
+      position:absolute;
+      top:50%; left:10px;
+      transform:translateY(-50%);
+      color:#94a3b8;
+      pointer-events:none;
+      transition:0.3s;
+      background:#020617;
+      padding:0 5px;
+    }
+
+    .contact-form input:focus + label,
+    .contact-form input:valid + label,
+    .contact-form textarea:focus + label,
+    .contact-form textarea:valid + label {
+      top:-8px;
+      font-size:12px;
+      color:#38bdf8;
+    }
+
+    .contact-form textarea {
+      height:120px;
+      resize:none;
+    }
+
+  </style>
 </head>
 
 <body>
 
 <header>
-<h1>MyPortfolio</h1>
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-<nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('about')">About</a>
-<a onclick="showSection('skills')">Skills</a>
-<a onclick="showSection('certificates')">Certificates</a>
-<a onclick="showSection('projects')">Projects</a>
-<a onclick="showSection('contact')">Contact</a>
-</nav>
+  <h1>MyPortfolio</h1>
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('skills')">Skills</a>
+    <a onclick="showSection('certificates')">Certificates</a>
+    <a onclick="showSection('projects')">Projects</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </nav>
 </header>
 
+<!-- HOME -->
 <section id="home" class="active hero">
-<img src="profile.jpg">
-<h2>Hi I'm Akash</h2>
-<p>Web Developer</p>
+  <img src="profile.jpg" alt="Profile Photo">
+  <h2>Hi, I'm Akash</h2>
+  <p>A passionate student & web developer</p>
 </section>
 
-<section id="about"><div class="section-box">
-<h2>About Me</h2>
-<p>Hello! I am Akash V, a Computer Science student passionate about development.</p>
-</div></section>
+<!-- ABOUT (NO IMAGE NOW) -->
+<section id="about">
+  <h2>About Me</h2>
 
-<section id="skills"><div class="section-box">
-<h2>Skills</h2>
-<div class="grid">
-<div class="card">HTML</div>
-<div class="card">CSS</div>
-<div class="card">JavaScript</div>
-</div>
-</div></section>
+  <div class="grid">
 
-<section id="certificates"><div class="section-box">
-<h2>Certificates</h2>
-<div class="grid">
-<div class="card"><img src="cert1.jpg"></div>
-<div class="card"><img src="cert2.jpg"></div>
-</div>
-</div></section>
+    <div class="card">
+      <h3>👋 Introduction</h3>
+      <p>
+        Hello! I am <strong>Akash V</strong>, a passionate Computer Science Engineering student from Azhikode, Kerala. Currently pursuing my B.Tech at Vimal Jyothi Engineering College, Chemperi, Kannur.
+      </p>
+    </div>
 
-<section id="projects"><div class="section-box">
-<h2>Projects</h2>
-<div class="grid">
-<div class="card"><a href="https://animated-dark-web.preview.emergentagent.com/campusconnect/home.html" target="_blank">Project 1</a></div>
-<div class="card"><a href="https://ideal-budget-pc-for-dail-2tkurhk.gamma.site/" target="_blank">Project 2</a></div>
-</div>
-</div></section>
+    <div class="card">
+      <h3>💻 Technical Skills</h3>
+      <p>
+        I enjoy building practical solutions through coding. My main programming languages are <strong>C</strong> and <strong>Python</strong>, along with tools like <strong>Git</strong> and <strong>LaTeX</strong>.
+      </p>
+    </div>
 
-<section id="contact"><div class="section-box">
-<h2>Contact</h2>
-<p>📱 9778782769</p>
-<p>📸 ak4sh_v</p>
-</div></section>
+    <div class="card">
+      <h3>🚀 Learning & Growth</h3>
+      <p>
+        I am always eager to learn new technologies and improve my development and problem-solving skills through real-world projects.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Career Goal</h3>
+      <p>
+        My goal is to become a skilled software developer and contribute to innovative and impactful tech projects.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🌐 Interests</h3>
+      <p>
+        I enjoy exploring new trends in technology, web development, and continuously improving my logical thinking through practice.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="grid">
+    <div class="card">HTML</div>
+    <div class="card">CSS</div>
+    <div class="card">JavaScript</div>
+    <div class="card">Problem Solving</div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <h2>Certificates</h2>
+  <div class="grid">
+    <div class="card"><img src="cert1.jpg"></div>
+    <div class="card"><img src="cert2.jpg"></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>CAMPUS CONNECT</h3>
+      <p>All-in-one student platform.</p>
+      <a href="https://animated-dark-web.preview.emergentagent.com/campusconnect/home.html" target="_blank">View Project</a>
+    </div>
+
+    <div class="card">
+      <h3>IDEAL PC FOR DAILY TASKS</h3>
+      <p>Smart PC selection system.</p>
+      <a href="https://ideal-budget-pc-for-dail-2tkurhk.gamma.site/" target="_blank">View Project</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>📧 Email</h3>
+      <p>akshvnd.2007@gmail.com</p>
+    </div>
+
+    <div class="card">
+      <h3>📱 Mobile</h3>
+      <p>9778782769</p>
+    </div>
+
+    <div class="card">
+      <h3>📸 Instagram</h3>
+      <p>@ak4sh_v</p>
+    </div>
+
+    <div class="card">
+      <h3>💼 LinkedIn</h3>
+      <p><a href="https://www.linkedin.com/in/akash-v-002739379" target="_blank">View Profile</a></p>
+    </div>
+
+  </div>
+
+  <!-- Contact Form -->
+  <h2 style="margin-top:50px;">Send a Message</h2>
+  <div class="card">
+    <form onsubmit="sendMessage(event)" class="contact-form">
+      <div class="input-box">
+        <input type="text" required>
+        <label>👤 Your Name</label>
+      </div>
+
+      <div class="input-box">
+        <input type="email" required>
+        <label>📧 Your Email</label>
+      </div>
+
+      <div class="input-box">
+        <textarea required></textarea>
+        <label>💬 Your Message</label>
+      </div>
+
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Akash</p>
+</footer>
 
 <script>
-function showSection(id){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
+function sendMessage(e) {
+  e.preventDefault();
 
-function toggleMenu(){
-document.querySelector('nav').classList.toggle('active');
+  // fake success animation
+  const btn = document.querySelector('.btn');
+  btn.innerText = 'Sending...';
+
+  setTimeout(() => {
+    btn.innerText = '✔ Message Sent';
+    btn.style.background = '#22c55e';
+  }, 1000);
 }
 </script>
 
+
+<!-- EmailJS Script -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+})();
+
+function sendMessage(e) {
+  e.preventDefault();
+
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const message = document.querySelector('textarea').value;
+
+  const btn = document.querySelector('.btn');
+  btn.innerText = 'Sending...';
+
+  emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+    from_name: name,
+    from_email: email,
+    message: message
+  }).then(() => {
+    btn.innerText = '✔ Message Sent';
+    btn.style.background = '#22c55e';
+  }, () => {
+    btn.innerText = '❌ Failed';
+    btn.style.background = 'red';
+  });
+}
+</script>
 </body>
 </html>
