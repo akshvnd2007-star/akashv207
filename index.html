@@ -284,9 +284,40 @@
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>📧 Email</h3>
+      <p>akshvnd.2007@gmail.com</p>
+    </div>
+
+    <div class="card">
+      <h3>📱 Mobile</h3>
+      <p>9778782769</p>
+    </div>
+
+    <div class="card">
+      <h3>📸 Instagram</h3>
+      <p>@ak4sh_v</p>
+    </div>
+
+    <div class="card">
+      <h3>💼 LinkedIn</h3>
+      <p><a href="https://www.linkedin.com/in/akash-v-002739379" target="_blank">View Profile</a></p>
+    </div>
+
+  </div>
+
+  <!-- Contact Form -->
+  <h2 style="margin-top:50px;">Send a Message</h2>
   <div class="card">
-    <p>Email: akshvnd.2007@gmail.com</p>
-    <p><a href="https://www.linkedin.com/in/akash-v-002739379">LinkedIn Profile</a></p>
+    <form onsubmit="sendMessage(event)">
+      <input type="text" placeholder="Your Name" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
+      <input type="email" placeholder="Your Email" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
+      <textarea placeholder="Your Message" required style="width:100%; padding:10px; height:120px; border-radius:5px; border:none;"></textarea>
+      <button class="btn" type="submit">Send Message</button>
+    </form>
   </div>
 </section>
 
@@ -299,7 +330,12 @@ function showSection(id) {
   document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+function sendMessage(e) {
+  e.preventDefault();
+  alert('Message sent successfully!');
+}
 </script>
 
 </body>
 </html>
+
