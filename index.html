@@ -7,98 +7,63 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-    body { background:#0f172a; color:#fff; scroll-behavior:smooth; }
+    body { background:#0f172a; color:#fff; }
 
     header {
       position:fixed; width:100%; top:0; background:rgba(15,23,42,0.9);
       display:flex; justify-content:space-between; padding:15px 50px; z-index:1000;
     }
+
     header h1 { color:#38bdf8; }
-    nav a { color:#fff; margin-left:20px; text-decoration:none; transition:0.3s; }
-    nav a:hover { color:#38bdf8; }
 
-    section { padding:100px 50px; min-height:100vh; }
+    nav a {
+      color:#fff; margin-left:20px; text-decoration:none; cursor:pointer;
+    }
 
-    .hero { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+    section {
+      display:none; /* hide all sections by default */
+      padding:100px 50px;
+      min-height:100vh;
+      animation:fadeIn 0.6s ease;
+    }
+
+    .active {
+      display:block; /* show only active section */
+    }
+
+    .hero {
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+    }
+
     .hero img {
       width:150px; height:150px; border-radius:50%; margin-bottom:20px;
-      border:3px solid #38bdf8; object-fit:cover; animation:fadeIn 2s ease;
+      border:3px solid #38bdf8; object-fit:cover;
     }
-    .hero h2 { font-size:2.5rem; }
-    .hero p { margin-top:10px; color:#94a3b8; }
 
     .btn {
       margin-top:20px; padding:10px 20px; border:none;
       background:#38bdf8; color:#000; cursor:pointer; border-radius:5px;
-      transition:transform 0.3s;
     }
-    .btn:hover { transform:scale(1.1); }
 
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;
+    }
 
     .card {
       background:#1e293b; padding:20px; border-radius:10px;
-      transition:transform 0.3s, box-shadow 0.3s;
+      transition:0.3s;
     }
-    .card:hover { transform:translateY(-10px); box-shadow:0 10px 20px rgba(0,0,0,0.5); }
 
-    .cert img { width:100%; border-radius:8px; }
+    .card:hover {
+      transform:scale(1.05);
+      box-shadow:0 10px 25px rgba(56,189,248,0.3);
+    }
 
     footer { text-align:center; padding:20px; background:#020617; }
 
     @keyframes fadeIn {
       from { opacity:0; transform:translateY(20px);} 
       to { opacity:1; transform:translateY(0);} }
-
-    @media (max-width:768px) {
-      header { flex-direction:column; align-items:center; }
-      nav { margin-top:10px; }
-    }
-  
-    /* --- Extra Hover Effects --- */
-
-    /* Link underline animation */
-    nav a {
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      width: 0%;
-      height: 2px;
-      background: #38bdf8;
-      transition: width 0.3s ease;
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Button glow */
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #38bdf8;
-    }
-
-    /* Card hover zoom + glow */
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(56,189,248,0.3);
-    }
-
-    /* Project image zoom */
-    .card img {
-      transition: transform 0.4s ease;
-    }
-    .card:hover img {
-      transform: scale(1.08);
-    }
-
-    /* Smooth link hover color */
-    a {
-      transition: color 0.3s ease;
-    }
 
   </style>
 </head>
@@ -107,15 +72,15 @@
 <header>
   <h1>MyPortfolio</h1>
   <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('skills')">Skills</a>
+    <a onclick="showSection('certificates')">Certificates</a>
+    <a onclick="showSection('projects')">Projects</a>
+    <a onclick="showSection('contact')">Contact</a>
   </nav>
 </header>
 
-<section class="hero" id="about">
-  <!-- ADD YOUR IMAGE BELOW -->
+<section id="about" class="active hero">
   <img src="profile.jpg" alt="Profile Photo">
   <h2>Hello, I'm Akash</h2>
   <p>A passionate student & web developer</p>
@@ -125,19 +90,20 @@
 </section>
 
 <section id="skills">
-  <h2>Skills & Certificates</h2>
+  <h2>Skills</h2>
   <div class="grid">
     <div class="card">HTML</div>
     <div class="card">CSS</div>
     <div class="card">JavaScript</div>
     <div class="card">Problem Solving</div>
   </div>
+</section>
 
-  <h3 style="margin-top:40px;">Certificates</h3>
-  <div class="grid cert">
-    <!-- ADD CERTIFICATE IMAGES -->
-    <div class="card"><img src="cert1.jpg" alt="Certificate 1"></div>
-    <div class="card"><img src="cert2.jpg" alt="Certificate 2"></div>
+<section id="certificates">
+  <h2>Certificates</h2>
+  <div class="grid">
+    <div class="card"><img src="cert1.jpg" style="width:100%"></div>
+    <div class="card"><img src="cert2.jpg" style="width:100%"></div>
   </div>
 </section>
 
@@ -146,33 +112,33 @@
   <div class="grid">
     <div class="card">
       <h3>CAMPUS CONNECT</h3>
-      <p>CampusConnect combines bus tracking, event reminders, and classroom/library seat booking into one lightning-fast student experience.</p>
-      <a href="https://animated-dark-web.preview.emergentagent.com/campusconnect/home.html" target="_blank" style="color:#38bdf8;">View Project</a>
+      <p>CampusConnect combines bus tracking and seat booking.</p>
+      <a href="https://animated-dark-web.preview.emergentagent.com/campusconnect/home.html" target="_blank">View Project</a>
     </div>
 
     <div class="card">
       <h3>IDEAL PC FOR DAILY TASKS</h3>
-      <p>Smart component selection for a smooth and reliable home PC experience.</p>
-      <a href="https://ideal-budget-pc-for-dail-2tkurhk.gamma.site/" target="_blank" style="color:#38bdf8;">View Project</a>
+      <p>Smart component selection for daily PC use.</p>
+      <a href="https://ideal-budget-pc-for-dail-2tkurhk.gamma.site/" target="_blank">View Project</a>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <h2>Contact Me</h2>
+  <h2>Contact</h2>
   <p>Email: akshvnd.2007@gmail.com</p>
-  <p>
-    LinkedIn: <a href="https://www.linkedin.com/in/akash-v-002739379" style="color:#38bdf8">Your Profile</a>
-  </p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/akash-v-002739379">Profile</a></p>
 </section>
 
 <footer>
-  <p>© 2026 Akash | All Rights Reserved</p>
+  <p>© 2026 Akash</p>
 </footer>
 
 <script>
-  function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  function showSection(id) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
   }
 </script>
 
