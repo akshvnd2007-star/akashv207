@@ -5,68 +5,171 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-    body { background:#0f172a; color:#fff; }
+
+    body {
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color:#fff;
+      overflow-x:hidden;
+    }
 
     header {
-      position:fixed; width:100%; top:0; background:rgba(15,23,42,0.9);
-      display:flex; justify-content:space-between; padding:15px 50px; z-index:1000;
+      position:fixed; width:100%; top:0;
+      background:rgba(15,23,42,0.8);
+      backdrop-filter: blur(10px);
+      display:flex; justify-content:space-between;
+      padding:15px 50px; z-index:1000;
     }
 
     header h1 { color:#38bdf8; }
 
     nav a {
-      color:#fff; margin-left:20px; text-decoration:none; cursor:pointer;
+      color:#fff; margin-left:20px; cursor:pointer;
+      position:relative;
     }
 
+    nav a::after {
+      content:'';
+      position:absolute;
+      bottom:-5px; left:0;
+      width:0%; height:2px;
+      background:#38bdf8;
+      transition:0.3s;
+    }
+
+    nav a:hover::after { width:100%; }
+
     section {
-      display:none; /* hide all sections by default */
-      padding:100px 50px;
+      display:none;
+      padding:120px 50px;
       min-height:100vh;
       animation:fadeIn 0.6s ease;
     }
 
-    .active {
-      display:block; /* show only active section */
-    }
+    .active { display:block; }
 
+    /* HERO */
     .hero {
-      display:flex; flex-direction:column; align-items:center; text-align:center;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
     }
 
     .hero img {
-      width:150px; height:150px; border-radius:50%; margin-bottom:20px;
-      border:3px solid #38bdf8; object-fit:cover;
+      width:150px; height:150px;
+      border-radius:50%;
+      border:3px solid #38bdf8;
+      margin-bottom:20px;
+      transition:0.4s;
+    }
+
+    .hero img:hover {
+      transform:scale(1.1);
+      box-shadow:0 0 25px #38bdf8;
+    }
+
+    .hero h2 {
+      font-size:2.5rem;
+      animation:slideUp 1s ease;
+    }
+
+    .hero p {
+      color:#94a3b8;
+      margin-top:10px;
     }
 
     .btn {
-      margin-top:20px; padding:10px 20px; border:none;
-      background:#38bdf8; color:#000; cursor:pointer; border-radius:5px;
-    }
-
-    .grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;
-    }
-
-    .card {
-      background:#1e293b; padding:20px; border-radius:10px;
+      margin-top:20px;
+      padding:10px 20px;
+      background:#38bdf8;
+      border:none; border-radius:5px;
+      cursor:pointer;
       transition:0.3s;
     }
 
-    .card:hover {
-      transform:scale(1.05);
-      box-shadow:0 10px 25px rgba(56,189,248,0.3);
+    .btn:hover {
+      transform:scale(1.1);
+      box-shadow:0 0 15px #38bdf8;
     }
 
-    footer { text-align:center; padding:20px; background:#020617; }
+    /* GRID */
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+      margin-top:30px;
+    }
 
+    /* CARDS */
+    .card {
+      background:rgba(30,41,59,0.8);
+      border-radius:15px;
+      padding:20px;
+      backdrop-filter:blur(10px);
+      transition:0.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before {
+      content:'';
+      position:absolute;
+      width:100%; height:100%;
+      background:linear-gradient(120deg,transparent,#38bdf8,transparent);
+      top:-100%; left:0;
+      transition:0.5s;
+    }
+
+    .card:hover::before { top:100%; }
+
+    .card:hover {
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 20px 40px rgba(56,189,248,0.3);
+    }
+
+    .card img {
+      width:100%; border-radius:10px;
+      transition:0.4s;
+    }
+
+    .card:hover img { transform:scale(1.08); }
+
+    /* SECTION TITLES */
+    h2 {
+      text-align:center;
+      margin-bottom:20px;
+      font-size:2rem;
+      position:relative;
+    }
+
+    h2::after {
+      content:'';
+      width:60px; height:3px;
+      background:#38bdf8;
+      display:block;
+      margin:10px auto;
+    }
+
+    footer {
+      text-align:center;
+      padding:20px;
+      background:#020617;
+    }
+
+    /* ANIMATIONS */
     @keyframes fadeIn {
-      from { opacity:0; transform:translateY(20px);} 
-      to { opacity:1; transform:translateY(0);} }
+      from {opacity:0; transform:translateY(20px);} 
+      to {opacity:1; transform:translateY(0);} }
+
+    @keyframes slideUp {
+      from {opacity:0; transform:translateY(40px);} 
+      to {opacity:1; transform:translateY(0);} }
 
   </style>
 </head>
+
 <body>
 
 <header>
@@ -81,28 +184,25 @@
   </nav>
 </header>
 
-<!-- Landing Section (Home) -->
-<!-- Home Section (with photo + short intro) -->
+<!-- HOME -->
 <section id="home" class="active hero">
   <img src="profile.jpg" alt="Profile Photo">
   <h2>Hi, I'm Akash</h2>
   <p>A passionate student & web developer</p>
 </section>
 
+<!-- ABOUT (NO IMAGE NOW) -->
 <section id="about">
   <h2>About Me</h2>
-  <p>
-    I am a student and web developer who enjoys building modern and responsive websites.
-    I have experience in HTML, CSS, and JavaScript, and I love creating user-friendly designs.
-  </p>
-  <img src="profile.jpg" alt="Profile Photo">
-  <h2>Hello, I'm Akash</h2>
-  <p>A passionate student & web developer</p>
-  <a href="resume.pdf" download>
-    <button class="btn">Download Resume</button>
-  </a>
+  <div class="card">
+    <p>
+      I am a student and web developer passionate about building modern, responsive, and interactive websites.
+      I enjoy solving problems and continuously improving my skills in web development.
+    </p>
+  </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <h2>Skills</h2>
   <div class="grid">
@@ -113,35 +213,40 @@
   </div>
 </section>
 
+<!-- CERTIFICATES -->
 <section id="certificates">
   <h2>Certificates</h2>
   <div class="grid">
-    <div class="card"><img src="cert1.jpg" style="width:100%"></div>
-    <div class="card"><img src="cert2.jpg" style="width:100%"></div>
+    <div class="card"><img src="cert1.jpg"></div>
+    <div class="card"><img src="cert2.jpg"></div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
   <div class="grid">
     <div class="card">
       <h3>CAMPUS CONNECT</h3>
-      <p>CampusConnect combines bus tracking and seat booking.</p>
+      <p>All-in-one student platform.</p>
       <a href="https://animated-dark-web.preview.emergentagent.com/campusconnect/home.html" target="_blank">View Project</a>
     </div>
 
     <div class="card">
       <h3>IDEAL PC FOR DAILY TASKS</h3>
-      <p>Smart component selection for daily PC use.</p>
+      <p>Smart PC selection system.</p>
       <a href="https://ideal-budget-pc-for-dail-2tkurhk.gamma.site/" target="_blank">View Project</a>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: akshvnd.2007@gmail.com</p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/akash-v-002739379">Profile</a></p>
+  <div class="card">
+    <p>Email: akshvnd.2007@gmail.com</p>
+    <p><a href="https://www.linkedin.com/in/akash-v-002739379">LinkedIn Profile</a></p>
+  </div>
 </section>
 
 <footer>
@@ -149,28 +254,13 @@
 </footer>
 
 <script>
-  function showSection(id) {
-    // hide all sections
-    const sections = document.querySelectorAll('section');
-    sections.forEach(sec => sec.classList.remove('active'));
-
-    // show selected
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active');
-    }
-  }
-
-  // ensure first section loads
-  document.addEventListener('DOMContentLoaded', () => {
-    showSection('home');
-  });
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 </script>
 
 </body>
 </html>
 
-
-</body>
-</html>
 
