@@ -10,7 +10,7 @@
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 
     body {
-      background: radial-gradient(circle at top, #14532d, #020617);
+      background: linear-gradient(135deg, #020617, #0a2540, #000000);
       color:#e2e8f0;
       overflow-x:hidden;
     }
@@ -175,6 +175,50 @@
       from {opacity:0; transform:translateY(40px);} 
       to {opacity:1; transform:translateY(0);} }
 
+  
+
+    /* CONTACT FORM STYLING */
+    .contact-form .input-box {
+      position:relative;
+      margin-bottom:20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width:100%;
+      padding:12px;
+      background:transparent;
+      border:1px solid rgba(56,189,248,0.3);
+      border-radius:6px;
+      color:#fff;
+      outline:none;
+    }
+
+    .contact-form label {
+      position:absolute;
+      top:50%; left:10px;
+      transform:translateY(-50%);
+      color:#94a3b8;
+      pointer-events:none;
+      transition:0.3s;
+      background:#020617;
+      padding:0 5px;
+    }
+
+    .contact-form input:focus + label,
+    .contact-form input:valid + label,
+    .contact-form textarea:focus + label,
+    .contact-form textarea:valid + label {
+      top:-8px;
+      font-size:12px;
+      color:#38bdf8;
+    }
+
+    .contact-form textarea {
+      height:120px;
+      resize:none;
+    }
+
   </style>
 </head>
 
@@ -312,10 +356,22 @@
   <!-- Contact Form -->
   <h2 style="margin-top:50px;">Send a Message</h2>
   <div class="card">
-    <form onsubmit="sendMessage(event)">
-      <input type="text" placeholder="Your Name" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
-      <input type="email" placeholder="Your Email" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
-      <textarea placeholder="Your Message" required style="width:100%; padding:10px; height:120px; border-radius:5px; border:none;"></textarea>
+    <form onsubmit="sendMessage(event)" class="contact-form">
+      <div class="input-box">
+        <input type="text" required>
+        <label>👤 Your Name</label>
+      </div>
+
+      <div class="input-box">
+        <input type="email" required>
+        <label>📧 Your Email</label>
+      </div>
+
+      <div class="input-box">
+        <textarea required></textarea>
+        <label>💬 Your Message</label>
+      </div>
+
       <button class="btn" type="submit">Send Message</button>
     </form>
   </div>
@@ -332,10 +388,49 @@ function showSection(id) {
 }
 function sendMessage(e) {
   e.preventDefault();
-  alert('Message sent successfully!');
+
+  // fake success animation
+  const btn = document.querySelector('.btn');
+  btn.innerText = 'Sending...';
+
+  setTimeout(() => {
+    btn.innerText = '✔ Message Sent';
+    btn.style.background = '#22c55e';
+  }, 1000);
 }
 </script>
 
+
+<!-- EmailJS Script -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
+})();
+
+function sendMessage(e) {
+  e.preventDefault();
+
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const message = document.querySelector('textarea').value;
+
+  const btn = document.querySelector('.btn');
+  btn.innerText = 'Sending...';
+
+  emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+    from_name: name,
+    from_email: email,
+    message: message
+  }).then(() => {
+    btn.innerText = '✔ Message Sent';
+    btn.style.background = '#22c55e';
+  }, () => {
+    btn.innerText = '❌ Failed';
+    btn.style.background = 'red';
+  });
+}
+</script>
 </body>
 </html>
 
